@@ -83,4 +83,10 @@ void wifictl_get_sta_mac(uint8_t *mac_sta);
  * @param channel channel in range 1 - 13
  */
 void wifictl_set_channel(uint8_t channel);
+
+/**
+ * @brief Transmit raw 802.11 frame
+ *
+ */
+esp_err_t esp_wifi_80211_tx(wifi_interface_t ifx, const void *buffer, int len, bool en_sys_seq);
 #endif
