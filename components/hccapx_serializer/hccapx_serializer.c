@@ -10,6 +10,7 @@
 
 #include <stdint.h>
 #include <string.h>
+#include <arpa/inet.h>
 #define LOG_LOCAL_LEVEL ESP_LOG_DEBUG
 #include "esp_log.h"
 #include "esp_err.h"
