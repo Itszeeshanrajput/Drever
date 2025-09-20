@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-    <img src="https://circuitpython.org/assets/images/board_images/yd_esp32_s3_n16r8.jpg" alt="YD-ESP32-S3-N16R8 Board">
+    <img src="https://raw.githubusercontent.com/yellobyte/ESP32-DevBoards-Getting-Started/main/boards/YD-ESP32-S3/doc/YD-ESP32-S3_DevBoard.JPG" alt="YD-ESP32-S3-N16R8 Board">
 </p>
 
 This project introduces an universal tool for ESP32 platform for implementing various Wi-Fi attacks. It provides some common functionality that is commonly used in Wi-Fi attacks and makes implementing new attacks a bit simpler. It also includes Wi-Fi attacks itself like capturing PMKIDs from handshakes, or handshakes themselves by different methods like starting rogue duplicated AP or sending deauthentication frames directly, etc...
