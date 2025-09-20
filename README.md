@@ -116,5 +116,24 @@ Feel free to contribute. Don't hestitate to refactor current code base. Please s
 ## Disclaimer
 This project demonstrates vulnerabilities of Wi-Fi networks and its underlaying 802.11 standard and how ESP32 platform can be utilised to attack on those vulnerable spots. Use responsibly against networks you have permission to attack on.
 
+## Build Environment
+
+This project has been successfully built using:
+- PlatformIO Core `6.1.18`
+- Espressif 32 Platform `6.12.0` (which uses ESP-IDF v5.5.0)
+
+To ensure a successful build, your `platformio.ini` should look like this:
+
+```ini
+[platformio]
+src_dir = main
+
+[env:esp32-s3-devkitc-1]
+platform = espressif32@6.12.0
+build_flags = -Wl,--wrap=ieee80211_raw_frame_sanity_check
+board = esp32-s3-devkitc-1
+framework = espidf
+```
+
 ## License
 Even though this project is licensed under MIT license (see [LICENSE](LICENSE) file for details), don't be shy or greedy and share your work.
