@@ -35,28 +35,19 @@ By default:
 
     ![Web client UI](doc/images/ui-config.png)
 
-## Build
-This project is currently developed using ESP-IDF 4.1 (commit `5ef1b390026270503634ac3ec9f1ec2e364e23b2`). It may be broken on newer version.
+## Build and Flash
+This project is built using PlatformIO. Make sure you have PlatformIO Core installed.
 
-Project can be built in the usual ESP-IDF way:
-
+To build the project, run the following command:
 ```shell
-idf.py build
+platformio run
 ```
 
-Legacy method using `make` is not supported by this project.
-
-## Flash
-If you have setup ESP-IDF, the easiest way is to use `idf.py flash`.
-
-In case you don't want to setup whole ESP-IDF, you can use pre-build binaries included in [`build/`](build/) and flash them using [`esptool.py`](https://github.com/espressif/esptool) (requires Python).
-
-Example command (follow instructions in [esptool repo](https://github.com/espressif/esptool)):
-```
-esptool.py -p /dev/ttyS5 -b 115200 --after hard_reset write_flash --flash_mode dio --flash_freq 40m --flash_size detect 0x8000 build/partition_table/partition-table.bin 0x1000 build/bootloader/bootloader.bin 0x10000 build/esp32-wifi-penetration-tool.bin
+To build and flash the project, run the following command. Replace `/dev/ttyUSB0` with the correct port for your device.
+```shell
+platformio run --target upload --upload-port /dev/ttyUSB0
 ```
 
-On Windows you can use official [Flash Download Tool](https://www.espressif.com/en/support/download/other-tools).
 
 ## Documentation
 ### Wi-Fi attacks
@@ -115,25 +106,6 @@ Feel free to contribute. Don't hestitate to refactor current code base. Please s
 
 ## Disclaimer
 This project demonstrates vulnerabilities of Wi-Fi networks and its underlaying 802.11 standard and how ESP32 platform can be utilised to attack on those vulnerable spots. Use responsibly against networks you have permission to attack on.
-
-## Build Environment
-
-This project has been successfully built using:
-- PlatformIO Core `6.1.18`
-- Espressif 32 Platform `6.12.0` (which uses ESP-IDF v5.5.0)
-
-To ensure a successful build, your `platformio.ini` should look like this:
-
-```ini
-[platformio]
-src_dir = main
-
-[env:esp32-s3-devkitc-1]
-platform = espressif32@6.12.0
-build_flags = -Wl,--wrap=ieee80211_raw_frame_sanity_check
-board = esp32-s3-devkitc-1
-framework = espidf
-```
 
 ## License
 Even though this project is licensed under MIT license (see [LICENSE](LICENSE) file for details), don't be shy or greedy and share your work.
