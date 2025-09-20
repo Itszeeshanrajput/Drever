@@ -1,12 +1,28 @@
 # ESP32 Wi-Fi Penetration Tool
 
+<p align="center">
+    <img src="doc/images/logo.png" alt="Logo">
+</p>
+
+<p align="center">
+    <img src="https://circuitpython.org/assets/images/board_images/yd_esp32_s3_n16r8.jpg" alt="YD-ESP32-S3-N16R8 Board">
+</p>
+
 This project introduces an universal tool for ESP32 platform for implementing various Wi-Fi attacks. It provides some common functionality that is commonly used in Wi-Fi attacks and makes implementing new attacks a bit simpler. It also includes Wi-Fi attacks itself like capturing PMKIDs from handshakes, or handshakes themselves by different methods like starting rogue duplicated AP or sending deauthentication frames directly, etc...
 
 Obviously cracking is not part of this project, as ESP32 is not sufficient to crack hashes in effective way. The rest can be done on this small, cheap, low-power SoC.
 
-<p align="center">
-    <img src="doc/images/logo.png" alt="Logo">
-</p>
+## Table of Contents
+- [Features](#features)
+- [Demo Video](#demo-video)
+- [Usage](#usage)
+- [Build and Flash](#build-and-flash)
+- [Documentation](#documentation)
+- [Hardware](#hardware)
+- [Similar projects](#similar-projects)
+- [Contributing](#contributing)
+- [Disclaimer](#disclaimer)
+- [License](#license)
 
 ## Features
 - **PMKID capture**
@@ -25,29 +41,30 @@ Obviously cracking is not part of this project, as ESP32 is not sufficient to cr
 
 
 ## Usage
-1. [Build](#Build) and [flash](#Flash) project onto ESP32 (DevKit or module)
-1. Power ESP32
-1. Management AP is started automatically after boot
-1. Connect to this AP\
-By default: 
-*SSID:* `ManagementAP` and *password:* `mgmtadmin`
-1. In browser open `192.168.4.1` and you should see a web client to configure and control tool like this:
+1. [Build and Flash](#build-and-flash) the project onto your ESP32 board.
+2. Power the ESP32.
+3. The management AP is started automatically after boot.
+4. Connect to this AP. By default:
+   - **SSID:** `ManagementAP`
+   - **Password:** `mgmtadmin`
+5. In your browser, open `192.168.4.1`. You should see a web client to configure and control the tool.
 
     ![Web client UI](doc/images/ui-config.png)
 
 ## Build and Flash
-This project is built using PlatformIO. Make sure you have PlatformIO Core installed.
+This project is built using **PlatformIO**. Make sure you have [PlatformIO Core](https://platformio.org/install/cli) installed.
 
-To build the project, run the following command:
+### Build
+To build the project, run the following command in your terminal:
 ```shell
 platformio run
 ```
 
-To build and flash the project, run the following command. Replace `/dev/ttyUSB0` with the correct port for your device.
+### Flash
+To build and flash the project to your device, run the following command. Replace `/dev/ttyUSB0` with the correct serial port for your device.
 ```shell
 platformio run --target upload --upload-port /dev/ttyUSB0
 ```
-
 
 ## Documentation
 ### Wi-Fi attacks
